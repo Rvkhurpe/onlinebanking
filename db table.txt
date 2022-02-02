@@ -1,0 +1,31 @@
+CREATE TABLE  "NEWACCOUNT" 
+   (	"ACCOUNTNO" NUMBER, 
+	"USERNAME" VARCHAR2(4000), 
+	"PASSWORD" VARCHAR2(4000), 
+	"REPASSWORD" VARCHAR2(4000), 
+	"AMOUNT" NUMBER, 
+	"ADDRESS" VARCHAR2(4000), 
+	"PHONE" NUMBER, 
+	 CONSTRAINT "NEWACCOUNT_PK" PRIMARY KEY ("ACCOUNTNO") ENABLE
+   )
+/
+
+
+CREATE OR REPLACE TRIGGER  "BI_NEWACCOUNT" 
+  before insert on "NEWACCOUNT"               
+  for each row  
+begin   
+    select "cdackolkatanewaccount".nextval into :NEW.ACCOUNTNO from dual; 
+end; 
+
+/
+ALTER TRIGGER  "BI_NEWACCOUNT" ENABLE
+/
+select cdackolkatanewaccount.nextval from dual
+CREATE SEQUENCE cdackolkatanewaccount
+    INCREMENT BY 10
+    START WITH 10
+    MINVALUE 10
+    MAXVALUE 1000
+    CYCLE
+    CACHE 2;
